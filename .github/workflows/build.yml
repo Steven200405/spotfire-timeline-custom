@@ -25,13 +25,14 @@ jobs:
       - name: Build Timeline Mod
         run: npm run build
 
-      - name: Create MOD package
+      - name: Show generated files
         run: |
-          cd dist
-          zip -r ../timeline-custom.mod .
+          echo "Contents of dist:"
+          find dist -maxdepth 2 -type f -print
 
-      - name: Upload compiled Mod
+      - name: Upload compiled Mod files
         uses: actions/upload-artifact@v4
         with:
-          name: timeline-custom
-          path: timeline-custom.mod
+          name: timeline-dist
+          path: dist/
+          if-no-files-found: error
